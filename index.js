@@ -37,3 +37,15 @@ const readAndAppend = (data, filePath) => {
     console.log(error.message);
   }
 };
+
+const NOTES_FILE_PATH = path.join(__dirname, "./db/db.json");
+
+const getNotes = (req, res) => {
+    try {
+        const notes = readFromFile(NOTES_FILE_PATH);
+    
+        return res.json(notes);
+      } catch (error) {
+        res.status(500).json({ succss: false, message: error.message });
+      }
+};
