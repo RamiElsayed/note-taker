@@ -17,7 +17,27 @@ app.get('/api/notes', (req, res) => {
   res.json(notes.slice(1));
 });
 
+const createNewNote = (body, notes) => {
+    const newNote = body;
+    if (!Array.isArray(notes)) {
+      notes = [];
+    }
 
+    if (notes.length === 0) {
+      notes.push(0);
+
+      body.id = notes[0];
+      notes[0]++;
+
+      notes.push(newNote);
+      fs.writeFileSync(
+        path.join(__dirname, './db/db.json'),
+        JSON.stringify(notes, null, 2)
+      );
+
+      return newNote;
+    }
+}
 
 
 app.listen(PORT, () =>
