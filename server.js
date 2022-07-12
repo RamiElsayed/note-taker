@@ -17,32 +17,32 @@ app.get('/api/notes', (req, res) => {
   res.json(notes.slice(1));
 });
 
-const createNewNote = (body, notes) => {
+const createNewNote = (body, notesArr) => {
     const newNote = body;
-    if (!Array.isArray(notes)) {
-      notes = [];
+    if (!Array.isArray(notesArr)) {
+      notesArr = [];
     }
 
-    if (notes.length === 0) {
-      notes.push(0);
+    if (notesArr.length === 0) {
+      notesArr.push(0);
 
-      body.id = notes[0];
-      notes[0]++;
+      body.id = notesArr[0];
+      notesArr[0]++;
 
-      notes.push(newNote);
+      notesArr.push(newNote);
       fs.writeFileSync(
         path.join(__dirname, './db/db.json'),
-        JSON.stringify(notes, null, 2)
+        JSON.stringify(notesArr, null, 2)
       );
 
       return newNote;
     }
 }
 
-app.post('api/notes', (req,res) => {
+app.post('/api/notes', (req,res) => {
   const note = createNewNote(req.body, notes);
   res.json(note);
-})
+});
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
@@ -52,6 +52,27 @@ app.get('/notes', (req, res) => {
 });
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+const deleteNote = (id, notes) => {
+  for (let i = 0; i < notes.length; i++) {
+    const note = array[i];
+    
+    if (note.id == id) {
+      notes.splice(i, 1);
+      fs.writeFileSync(
+        path.join(__dirname, './db/db.json'),
+        JSON.stringify(notes, null, 2)
+    );
+
+    break;
+    }
+  }
+}
+
+app.delete('/api/notes/:id', (req,res) => {
+  deleteNote(req.params.id, notes);
+  res.json(true);
 });
 
 app.listen(PORT, () =>
