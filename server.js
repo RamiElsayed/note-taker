@@ -1,3 +1,4 @@
+const { v4: uuid } = require ('uuid');
 const express = require('express');
 const app = express();
 
@@ -19,15 +20,12 @@ app.get('/api/notes', (req, res) => {
 
 const createNewNote = (body, notesArr) => {
     const newNote = body;
+    newNote.id = uuid()
     if (!Array.isArray(notesArr)) {
       notesArr = [];
     }
-
-    if (notesArr.length === 0) {
-      notesArr.push(0);
-
-      body.id = notesArr[0];
-      notesArr[0]++;
+    console.log(newNote)
+    console.log(notesArr)
 
       notesArr.push(newNote);
       fs.writeFileSync(
@@ -36,7 +34,7 @@ const createNewNote = (body, notesArr) => {
       );
 
       return newNote;
-    }
+    // }
 }
 
 app.post('/api/notes', (req,res) => {
@@ -56,7 +54,7 @@ app.get('*', (req, res) => {
 
 const deleteNote = (id, notes) => {
   for (let i = 0; i < notes.length; i++) {
-    const note = array[i];
+    const note = notes[i];
     
     if (note.id == id) {
       notes.splice(i, 1);
