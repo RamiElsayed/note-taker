@@ -24,8 +24,6 @@ const createNewNote = (body, notesArr) => {
     if (!Array.isArray(notesArr)) {
       notesArr = [];
     }
-    console.log(newNote)
-    console.log(notesArr)
 
       notesArr.push(newNote);
       fs.writeFileSync(
@@ -43,13 +41,13 @@ app.post('/api/notes', (req,res) => {
 });
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/index.html'));
+  res.sendFile(path.join(__dirname, './docs/index.html'));
 });
 app.get('/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/notes.html'));
+  res.sendFile(path.join(__dirname, './docs/notes.html'));
 });
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/index.html'));
+  res.sendFile(path.join(__dirname, './docs/index.html'));
 });
 
 const deleteNote = (id, notes) => {
