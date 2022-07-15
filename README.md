@@ -14,6 +14,8 @@
 - In the project I used local database to store data.
 - This project also built using JQuery, bootstrap and google fonts to build HTML page.
 - Files organised in a good structured way for easy access.
+- used Heroku to deploy my application as Heroku is required for deploying backend applications.
+- I used node.js, express library to build the backend.
 
 ## Links
 
