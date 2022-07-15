@@ -17,8 +17,9 @@
 
 ## Links
 
-[Deployment-Link](https://ramielsayed.github.io/note-taker/)
-![project-screenshot](./images/team-profile-generator.jpg)
+[Deployment-Link](https://nameless-falls-05709.herokuapp.com/)
+![project-screenshot](./screenshot/Note-Taker1.jpg)
+![project-screenshot](./screenshot/Note-Taker2.jpg)
 
 ## License 
 
